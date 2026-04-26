@@ -35,13 +35,35 @@ void TimeTracker::showMenu()
    else
       cout << "Нет активной задачи.\n";
    cout << "\nМеню:\n";
-   cout << "1. Все задачи\n2. Добавить задачу\n3. Редактировать задачу\n4. Удалить задачу\n";
-   cout << "5. Запустить таймер\n6. Остановить таймер\n";
-   cout << "7. Отчёт за сегодня\n8. Отчёт за период\n0. Выход\n> ";
+   cout << "1. Все задачи\n";
+   cout << "2. Добавить задачу\n";
+   cout << "3. Редактировать задачу\n";
+   cout << "4. Удалить задачу\n";
+   cout << "5. Запустить таймер\n";
+   cout << "6. Остановить таймер\n";
+   cout << "7. Отчёт за сегодня\n";
+   cout << "8. Отчёт за период\n";
+   cout << "0. Выход\n";
+   cout << "> ";
 }
 
 void TimeTracker::showAllTasks() { cout << "Все задачи\n"; }
-void TimeTracker::addNewTask() { cout << "Добавить задачу\n"; }
+
+void TimeTracker::addNewTask()
+{
+   cout << "Название задачи: ";
+   string name;
+   cin.ignore(); //* очистка буфер перед getline
+   getline(cin, name);
+   if (name.empty())
+   {
+      cout << "Имя не может быть пустым.\n";
+      return;
+   }
+   tasks.emplace_back(name); //* добавление задачи с именем
+   cout << "Задача добавлена.\n";
+}
+
 void TimeTracker::editTaskName() { cout << "Редактировать задачу\n"; }
 void TimeTracker::deleteTaskById() { cout << "Удалить задачу\n"; }
 void TimeTracker::startTimer() { cout << "Запуск таймера\n"; }
