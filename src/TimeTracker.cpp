@@ -80,7 +80,46 @@ void TimeTracker::addNewTask()
 
 void TimeTracker::editTaskName() { cout << "Редактировать задачу\n"; }
 void TimeTracker::deleteTaskById() { cout << "Удалить задачу\n"; }
-void TimeTracker::startTimer() { cout << "Запуск таймера\n"; }
+
+void TimeTracker::startTimer()
+{
+   if (tasks.empty())
+   {
+      cout << "Сначала создайте задачу.\n";
+      return;
+   }
+   if (activeTask)
+   {
+      //* автоматическое завершение активной задачи
+      for (auto &s : activeTask->getSessions())
+         if (!s.isFinished())
+         {
+            s.stop();
+            break;
+         }
+   }
+   showAllTasks();
+   int idx;
+   cout << "Номер задачи для запуска: ";
+   cin >> idx;
+   if (idx < 1 || idx > (int)tasks.size())
+   {
+      cout << "Неверный номер.\n";
+      return;
+   }
+   // Провка на завершённость сессии
+   for (const auto &s : tasks[idx - 1].getSessions())
+      if (!s.isFinished())
+      {
+         cout << "У этой задачи уже есть активная сессия.\n";
+         return;
+      }
+   Session newSession; //* старт => начало новой сессии
+   tasks[idx - 1].addSession(newSession);
+   activeTask = &tasks[idx - 1];
+   cout << "Таймер запущен для \"" << activeTask->getName() << "\".\n";
+}
+
 void TimeTracker::stopTimer() { cout << "Остановка таймера\n"; }
 void TimeTracker::showDailyReport() { cout << "Отчёт за сегодня\n"; }
 void TimeTracker::showPeriodReport() { cout << "Отчёт за период\n"; }
