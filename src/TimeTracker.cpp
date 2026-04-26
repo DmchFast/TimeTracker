@@ -75,6 +75,7 @@ void TimeTracker::addNewTask()
       return;
    }
    tasks.emplace_back(name); //* добавление задачи с именем
+   storage->save(tasks, activeTask);
    cout << "Задача добавлена.\n";
 }
 
@@ -117,6 +118,7 @@ void TimeTracker::startTimer()
    Session newSession; //* старт => начало новой сессии
    tasks[idx - 1].addSession(newSession);
    activeTask = &tasks[idx - 1];
+   storage->save(tasks, activeTask);
    cout << "Таймер запущен для \"" << activeTask->getName() << "\".\n";
 }
 
@@ -136,6 +138,7 @@ void TimeTracker::stopTimer()
       }
    cout << "Таймер для \"" << activeTask->getName() << "\" остановлен.\n";
    activeTask = nullptr; // сброс указателя контроля
+   storage->save(tasks, activeTask);
 }
 
 void TimeTracker::showDailyReport() { cout << "Отчёт за сегодня\n"; }
