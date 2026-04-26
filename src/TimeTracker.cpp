@@ -120,7 +120,24 @@ void TimeTracker::startTimer()
    cout << "Таймер запущен для \"" << activeTask->getName() << "\".\n";
 }
 
-void TimeTracker::stopTimer() { cout << "Остановка таймера\n"; }
+void TimeTracker::stopTimer()
+{
+   if (!activeTask)
+   {
+      cout << "Нет активной задачи.\n";
+      return;
+   }
+   //* поиск активной сессис => завершить
+   for (auto &s : activeTask->getSessions())
+      if (!s.isFinished())
+      {
+         s.stop();
+         break;
+      }
+   cout << "Таймер для \"" << activeTask->getName() << "\" остановлен.\n";
+   activeTask = nullptr; // сброс указателя контроля
+}
+
 void TimeTracker::showDailyReport() { cout << "Отчёт за сегодня\n"; }
 void TimeTracker::showPeriodReport() { cout << "Отчёт за период\n"; }
 
