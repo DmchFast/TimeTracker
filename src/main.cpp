@@ -5,7 +5,7 @@ using namespace std;
 
 int main()
 {
-   setlocale(LC_ALL, "Russian");
+   setlocale(LC_ALL, ".UTF-8");
    TimeTracker app;
    app.run();
    return 0;
