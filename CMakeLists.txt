@@ -20,6 +20,7 @@ set(SOURCES
    src/main.cpp
    src/TimeTracker.cpp
    src/Session.cpp
+   src/Task.cpp
 )
 
 # Объявление исполняемого файла
