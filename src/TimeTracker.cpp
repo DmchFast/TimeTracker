@@ -47,7 +47,21 @@ void TimeTracker::showMenu()
    cout << "> ";
 }
 
-void TimeTracker::showAllTasks() { cout << "Все задачи\n"; }
+void TimeTracker::showAllTasks()
+{
+   if (tasks.empty())
+   {
+      cout << "Список задач пока пуст.\n";
+      return;
+   }
+   for (size_t i = 0; i < tasks.size(); ++i)
+   {
+      long long sec = tasks[i].totalDuration(); //* общее время в сек
+      long long h = sec / 3600, m = (sec % 3600) / 60, s = sec % 60;
+      cout << i + 1 << ". " << tasks[i].getName()
+           << " (всего: " << h << "ч " << m << "м " << s << "с)\n";
+   }
+}
 
 void TimeTracker::addNewTask()
 {
