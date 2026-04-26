@@ -19,6 +19,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_BINARY_DIR}/bin)
 set(SOURCES
    src/main.cpp
    src/TimeTracker.cpp
+   src/Session.cpp
 )
 
 # Объявление исполняемого файла
