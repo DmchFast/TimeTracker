@@ -21,6 +21,7 @@ set(SOURCES
    src/TimeTracker.cpp
    src/Session.cpp
    src/Task.cpp
+   src/Storage.cpp
 )
 
 # Объявление исполняемого файла
